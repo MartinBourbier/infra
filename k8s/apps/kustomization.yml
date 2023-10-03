@@ -6,3 +6,4 @@ resources:
   - argocd.yml
   - cert-manager.yml
   - ingress-nginx.yml
+  - vault.yml

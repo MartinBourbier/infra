@@ -1,0 +1,77 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  labels:
+    app: vault
+  namespace: vault
+spec:
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+  destination:
+    name: in-cluster
+    namespace: vault
+  source:
+    chart: vault
+    repoURL: https://helm.releases.hashicorp.com
+    targetRevision: 0.24.1
+    helm:
+      values: |
+        fullnameOverride: vault
+        global:
+          enabled: true
+          tlsDisable: false
+        injector:
+          enabled: false
+        server:
+          standalone:
+            enabled: true
+            config: |
+              ui = true
+
+              listener "tcp" {
+                address = "[::]:8200"
+                cluster_address = "[::]:8201"
+                tls_cert_file = "/vault/userconfig/tls/tls.crt"
+                tls_key_file = "/vault/userconfig/tls/tls.key"
+              }
+              storage "file" {
+                path = "/vault/data"
+              }
+          volumes:
+            - name: tls
+              secret:
+                secretName: vault-tls
+          volumeMounts:
+            - mountPath: /vault/userconfig/tls
+              name: tls
+              readOnly: true
+          dataStorage:
+            enabled: true
+            size: 10Gi
+          auditStorage:
+            enabled: true
+            size: 10Gi
+          shareProcessNamespace: true
+          service:
+            type: NodePort
+            nodePort: 30820
+          ingress:
+            enabled: true
+            annotations:
+              cert-manager.io/cluster-issuer: default-issuer
+              kubernetes.io/tls-acme: "true"
+              nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+              nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+            hosts:
+              - host: vault.api.martinbourbier.com
+            tls:
+              - hosts:
+                  - vault.api.martinbourbier.com
+                secretName: vault-tls
+
