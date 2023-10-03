@@ -58,6 +58,9 @@ spec:
             enabled: true
             size: 10Gi
           shareProcessNamespace: true
+          readinessProbe:
+            enabled: true
+            path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
           service:
             type: NodePort
             nodePort: 30820
