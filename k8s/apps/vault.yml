@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault
+  name: in-cluster-vault
   labels:
     app: vault
   namespace: vault
@@ -35,8 +35,8 @@ spec:
               ui = true
 
               listener "tcp" {
-                address = "[::]:8200"
-                cluster_address = "[::]:8201"
+                address = "0.0.0.0:8200"
+                cluster_address = "0.0.0.0:8201"
                 tls_cert_file = "/vault/userconfig/tls/tls.crt"
                 tls_key_file = "/vault/userconfig/tls/tls.key"
               }
@@ -61,9 +61,6 @@ spec:
           readinessProbe:
             enabled: true
             path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
-          service:
-            type: NodePort
-            nodePort: 30820
           ingress:
             enabled: true
             annotations:
@@ -71,6 +68,7 @@ spec:
               kubernetes.io/tls-acme: "true"
               nginx.ingress.kubernetes.io/ssl-passthrough: "true"
               nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+            ingressClassName: "nginx"
             hosts:
               - host: vault.api.martinbourbier.com
             tls:
