@@ -12,7 +12,7 @@ metadata:
 spec:
   ingressClassName: "nginx"
   rules:
-    - host: argocd.martinbourbier.com
+    - host: argocd.api.martinbourbier.com
       http:
         paths:
           - path: /
@@ -25,6 +25,6 @@ spec:
 
   tls:
     - hosts:
-      - argocd.martinbourbier.com
+      - argocd.api.martinbourbier.com
       secretName: argocd-tls
 
