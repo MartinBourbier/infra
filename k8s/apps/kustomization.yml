@@ -1,0 +1,8 @@
+---
+kind: Kustomization
+namespace: argocd
+
+resources:
+  - argocd.yml
+  - cert-manager.yml
+  - ingress-nginx.yml

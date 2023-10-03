@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: argocd
+    name: in-cluster
+  source:
+    repoURL: https://github.com/MartinBourbier/infra.git
+    targetRevision: HEAD
+    path: k8s/manifests/cert-manager
+
