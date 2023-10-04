@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-secrets-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault-secrets-operator
+  template:
+    metadata:
+      labels:
+        app: vault-secrets-operator
+    spec:
+      serviceAccountName: vault-secrets-operator
+      imagePullSecrets:
+        - name: vault-dockerconfig
+      containers:
+        - name: vault-secrets-operator
+          image: banzaicloud/vault-secrets-operator:1.19.0
+          env:
+            - name: VAULT_ADDR
+              value: "https://vault.api.martinbourbier.com"
+            - name: VAULT_ROLE
+              value: "vault-secrets-operator"
+

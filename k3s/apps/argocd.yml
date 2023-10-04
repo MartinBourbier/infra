@@ -21,5 +21,5 @@ spec:
   source:
     repoURL: https://github.com/MartinBourbier/infra.git
     targetRevision: HEAD
-    path: k8s/argocd
+    path: k3s/argocd
 
