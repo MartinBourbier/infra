@@ -6,5 +6,8 @@ resources:
   - argocd.yml
   - cert-manager.yml
   - ingress-nginx.yml
-  - vault.yml
+  - postgres-operator.yml
+  - postgres.yml
   - vault-secrets-operator.yml
+  - vault.yml
+

@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-operator
+  namespace: postgres
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: postgres-operator
+spec:
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+  destination:
+    name: in-cluster
+    namespace: postgres-operator
+  project: default
+  source:
+    repoURL: https://github.com/MartinBourbier/infra.git
+    targetRevision: HEAD
+    path: k3s/manifests/postgres-operator
+

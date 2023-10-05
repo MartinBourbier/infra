@@ -1,0 +1,29 @@
+---
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: main-cluster
+  namespace: postgres
+  annotations:
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+spec:
+  teamId: infra
+  volume:
+    size: 10Gi
+  numberOfInstances: 1
+
+  users:
+
+  databases:
+
+  postgresql:
+    version: "14"
+    parameters:
+      max_connections: "500"
+
+  additionalVolumes:
+    - name: pgbackup
+      mountPath: /home/postgres/pgbackup
+      volumeSource:
+        emptyDir: {}
+
