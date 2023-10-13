@@ -19,3 +19,7 @@ provider "cloudflare" {
   api_token = data.vault_generic_secret.cloudflare.data.api_token
 }
 
+provider "vault" {
+  address = "https://vault.api.martinbourbier.com:443"
+}
+
