@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/terraform
-# Edit at https://www.toptal.com/developers/gitignore?templates=terraform
+# Created by https://www.toptal.com/developers/gitignore/api/terraform,vim
+# Edit at https://www.toptal.com/developers/gitignore?templates=terraform,vim
 
 ### Terraform ###
 # Local .terraform directories
@@ -37,7 +37,26 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-# End of https://www.toptal.com/developers/gitignore/api/terraform
+### Vim ###
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
 
-.secrets
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+# End of https://www.toptal.com/developers/gitignore/api/terraform,vim
 
