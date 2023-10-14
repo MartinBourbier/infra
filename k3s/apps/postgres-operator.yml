@@ -9,6 +9,7 @@ metadata:
   labels:
     app: postgres-operator
 spec:
+  project: default
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
@@ -17,7 +18,6 @@ spec:
   destination:
     name: in-cluster
     namespace: postgres-operator
-  project: default
   source:
     repoURL: https://github.com/MartinBourbier/infra.git
     targetRevision: HEAD
