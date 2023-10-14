@@ -7,8 +7,6 @@ metadata:
     app: portfolio
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: portfolio
@@ -24,10 +22,11 @@ spec:
           ports:
             - name: http
               containerPort: 80
+              protocol: TCP
           resources:
             requests:
-              cpu: 400m
-              memory: 100Mi
+              cpu: 200m
+              memory: 50Mi
             limits:
-              memory: 100Mi
+              memory: 50Mi
 
