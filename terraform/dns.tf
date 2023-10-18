@@ -18,6 +18,14 @@ resource "cloudflare_record" "argocd" {
   proxied = false
 }
 
+resource "cloudflare_record" "keycloak" {
+  zone_id = data.cloudflare_zone.this.id
+  name    = "keycloak.api"
+  value   = "api.${data.cloudflare_zone.this.name}"
+  type    = "CNAME"
+  proxied = false
+}
+
 resource "cloudflare_record" "portfolio" {
   zone_id = data.cloudflare_zone.this.id
   name    = "portfolio"

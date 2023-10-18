@@ -13,8 +13,10 @@ spec:
   numberOfInstances: 1
 
   users:
+    keycloak.keycloak: []
 
   databases:
+    keycloak: keycloak.keycloak
 
   postgresql:
     version: "14"

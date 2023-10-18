@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: keycloak
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: keycloak
+spec:
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+  destination:
+    name: in-cluster
+    namespace: keycloak
+  project: default
+  source:
+    repoURL: https://github.com/MartinBourbier/infra.git
+    targetRevision: HEAD
+    path: k3s/manifests/keycloak
+
