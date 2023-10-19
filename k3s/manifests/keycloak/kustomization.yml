@@ -13,5 +13,5 @@ configMapGenerator:
     literals:
       - KC_DB=postgres
       - KC_DB_URL_HOST=main-cluster.postgres.svc.cluster.local
-      - KC_HOSTNAME=https://keycloak.api.martinbourbier.com
+      - KC_HOSTNAME_URL=https://keycloak.api.martinbourbier.com
 
