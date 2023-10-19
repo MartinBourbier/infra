@@ -14,9 +14,11 @@ spec:
 
   users:
     keycloak.keycloak: []
+    bitwarden.bitwarden: []
 
   databases:
     keycloak: keycloak.keycloak
+    bitwarden: bitwarden.bitwarden
 
   postgresql:
     version: "14"

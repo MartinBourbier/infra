@@ -4,6 +4,7 @@ namespace: argocd
 
 resources:
   - argocd.yml
+  - bitwarden.yml
   - cert-manager.yml
   - ingress-nginx.yml
   - keycloak.yml

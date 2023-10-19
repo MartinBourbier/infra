@@ -34,3 +34,11 @@ resource "cloudflare_record" "portfolio" {
   proxied = false
 }
 
+resource "cloudflare_record" "bitwarden" {
+  zone_id = data.cloudflare_zone.this.id
+  name    = "bitwarden"
+  value   = "${data.cloudflare_zone.this.name}"
+  type    = "CNAME"
+  proxied = false
+}
+

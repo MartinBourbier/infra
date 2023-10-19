@@ -1,0 +1,35 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bitwarden-ingress
+  namespace: bitwarden
+  annotations:
+    cert-manager.io/cluster-issuer: default-issuer
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: bitwarden.martinbourbier.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bitwarden
+                port:
+                  name: http
+          - path: /notifications/hub
+            pathType: Exact
+            backend:
+              service:
+                name: bitwarden
+                port:
+                  name: websocket
+
+  tls:
+    - hosts:
+      - bitwarden.martinbourbier.com
+      secretName: bitwarden-tls
+

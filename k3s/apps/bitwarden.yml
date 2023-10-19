@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bitwarden
+  namespace: bitwarden
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: bitwarden
+spec:
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+  destination:
+    name: in-cluster
+    namespace: bitwarden
+  project: default
+  source:
+    repoURL: https://github.com/MartinBourbier/infra.git
+    targetRevision: HEAD
+    path: k3s/manifests/bitwarden
+
