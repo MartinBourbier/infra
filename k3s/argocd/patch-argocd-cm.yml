@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  url: https://argocd.api.martinbourbier.com
+  oidc.config: |
+    name: Keycloak
+    issuer: https://keycloak.api.martinbourbier.com/realms/apps
+    clientID: argocd
+    clientSecret: $argocd-keycloak-oidc:keycloak.clientSecret
+    requestedScopes: ["openid", "profile", "email", "groups"]
+

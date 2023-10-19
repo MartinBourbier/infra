@@ -8,4 +8,9 @@ resources:
   - github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.3
   - ingress.yml
   - namespace.yml
+  - secrets.yml
+
+patches:
+  - path: patch-argocd-cm.yml
+  - path: patch-argocd-rbac-cm.yml
 
