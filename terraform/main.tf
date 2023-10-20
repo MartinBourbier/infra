@@ -12,7 +12,7 @@ terraform {
 }
 
 data "vault_generic_secret" "cloudflare" {
-  path = "kv/infra/cloudflare"
+  path = "in-cluster/infra/cloudflare"
 }
 
 provider "cloudflare" {
