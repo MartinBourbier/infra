@@ -40,6 +40,11 @@ spec:
                 secretKeyRef:
                   name: bitwarden-push-installation-credentials
                   key: PUSH_INSTALLATION_KEY
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: bitwarden-database-info
+                  key: DATABASE_URL
           ports:
             - containerPort: 8080
               name: http
