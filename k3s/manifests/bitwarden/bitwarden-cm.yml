@@ -15,4 +15,5 @@ data:
   ROCKET_PORT: "8080"
   SIGNUP_ALLOWED: "true"
   INVITATIONS_ALLOWED: "true"
+  PUSH_ENABLED: "true"
 
