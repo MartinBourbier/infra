@@ -1,0 +1,41 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-ingress
+  namespace: minio
+  annotations:
+    cert-manager.io/cluster-issuer: default-issuer
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: s3.api.martinbourbier.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  name: http
+    - host: console.s3.api.martinbourbier.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  name: console
+
+  tls:
+    - hosts:
+      - s3.api.martinbourbier.com
+      secretName: minio-tls
+    - hosts:
+      - console.s3.api.martinbourbier.com
+      secretName: minio-console-tls
+

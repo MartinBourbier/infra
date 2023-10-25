@@ -1,0 +1,25 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yml
+  - ingress.yml
+  - secrets.yml
+  - service.yml
+  - pvc.yml
+
+images:
+  - name: minio
+    newName: minio/minio
+    newTag: RELEASE.2021-08-05T22-01-19Z
+
+configMapGenerator:
+  - name: minio-oidc-config
+    literals:
+      - MINIO_IDENTITY_OPENID_CONFIG_URL="https://keycloak.api.martinbourbier.com/realms/apps"
+      - MINIO_IDENTITY_OPENID_CLIENT_ID="minio"
+      - MINIO_IDENTITY_OPENID_SCOPES="openid,profile,email,groups"
+      - MINIO_IDENTITY_OPENID_DISPLAY_NAME="SSO login"
+      - MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC="on"
+

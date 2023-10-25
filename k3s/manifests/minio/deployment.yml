@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+  labels:
+    app: minio
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: minio
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+        - name: minio
+          image: minio
+          args:
+            - server
+            - --console-address
+            - ":9001"
+            - /export
+          env:
+            - name: MINIO_PROMETHEUS_AUTH_TYPE
+              value: public
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: minio-root-creds
+                  key: MINIO_ROOT_USER
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minio-root-creds
+                  key: MINIO_ROOT_PASSWORD
+            - name: MINIO_IDENTITY_OPENID_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: minio-root-creds
+                  key: MINIO_IDENTITY_OPENID_CLIENT_SECRET
+          envFrom:
+            - configMapRef:
+                name: minio-oidc-config
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+            - name: console
+              containerPort: 9001
+              protocol: TCP
+          volumeMounts:
+            - name: datadir
+              mountPath: /export
+      volumes:
+        - name: datadir
+          persistentVolumeClaim:
+            claimName: minio-datadir
+

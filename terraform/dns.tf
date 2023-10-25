@@ -26,6 +26,22 @@ resource "cloudflare_record" "keycloak" {
   proxied = false
 }
 
+resource "cloudflare_record" "s3" {
+  zone_id = data.cloudflare_zone.this.id
+  name    = "s3.api"
+  value   = "api.${data.cloudflare_zone.this.name}"
+  type    = "CNAME"
+  proxied = false
+}
+
+resource "cloudflare_record" "console_s3" {
+  zone_id = data.cloudflare_zone.this.id
+  name    = "console.s3.api"
+  value   = "api.${data.cloudflare_zone.this.name}"
+  type    = "CNAME"
+  proxied = false
+}
+
 resource "cloudflare_record" "portfolio" {
   zone_id = data.cloudflare_zone.this.id
   name    = "portfolio"
@@ -49,5 +65,4 @@ resource "cloudflare_record" "harbor" {
   type    = "CNAME"
   proxied = false
 }
-
 

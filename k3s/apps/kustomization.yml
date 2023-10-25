@@ -9,6 +9,7 @@ resources:
   - harbor.yml
   - ingress-nginx.yml
   - keycloak.yml
+  - minio.yml
   - portfolio.yml
   - postgres-operator.yml
   - postgres.yml
