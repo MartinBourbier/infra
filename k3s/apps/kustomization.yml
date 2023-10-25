@@ -8,7 +8,6 @@ resources:
   - cert-manager.yml
   - ingress-nginx.yml
   - keycloak.yml
-  - kube-oidc-proxy.yml
   - portfolio.yml
   - postgres-operator.yml
   - postgres.yml
