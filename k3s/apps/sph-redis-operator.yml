@@ -1,0 +1,23 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sph-redis-operator
+  labels:
+    app: sph-redis-operator
+spec:
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    automated:
+      prune: true
+  destination:
+    name: in-cluster
+    namespace: sph-redis-operator
+  source:
+    chart: redis-operator
+    repoURL: https://spotahome.github.io/redis-operator
+    targetRevision: 3.2.8
+

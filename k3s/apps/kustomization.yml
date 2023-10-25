@@ -11,6 +11,7 @@ resources:
   - portfolio.yml
   - postgres-operator.yml
   - postgres.yml
+  - sph-redis-operator.yml
   - vault-secrets-operator.yml
   - vault.yml
 
