@@ -1,0 +1,31 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+  namespace: harbor
+  labels:
+    app: harbor
+spec:
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+  destination:
+    name: in-cluster
+    namespace: harbor
+  source:
+    chart: harbor
+    repoURL: https://helm.goharbor.io
+    targetRevision: 1.13.0
+    helm:
+      values: |
+        externalURL: https://harbor.martinbourbier.com
+        expose:
+          ingress:
+            hosts:
+              core: harbor.martinbourbier.com
+            className: nginx
+

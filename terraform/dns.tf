@@ -26,14 +26,6 @@ resource "cloudflare_record" "keycloak" {
   proxied = false
 }
 
-resource "cloudflare_record" "kube" {
-  zone_id = data.cloudflare_zone.this.id
-  name    = "kube.api"
-  value   = "api.${data.cloudflare_zone.this.name}"
-  type    = "CNAME"
-  proxied = false
-}
-
 resource "cloudflare_record" "portfolio" {
   zone_id = data.cloudflare_zone.this.id
   name    = "portfolio"
@@ -49,4 +41,13 @@ resource "cloudflare_record" "bitwarden" {
   type    = "CNAME"
   proxied = false
 }
+
+resource "cloudflare_record" "harbor" {
+  zone_id = data.cloudflare_zone.this.id
+  name    = "harbor"
+  value   = "${data.cloudflare_zone.this.name}"
+  type    = "CNAME"
+  proxied = false
+}
+
 

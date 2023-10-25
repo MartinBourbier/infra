@@ -6,6 +6,7 @@ resources:
   - argocd.yml
   - bitwarden.yml
   - cert-manager.yml
+  - harbor.yml
   - ingress-nginx.yml
   - keycloak.yml
   - portfolio.yml
