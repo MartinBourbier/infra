@@ -7,6 +7,7 @@ metadata:
     app: portfolio
 spec:
   replicas: 1
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: portfolio
